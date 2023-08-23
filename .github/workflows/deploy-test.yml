@@ -14,14 +14,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
       - name: Log in to the Container registry
-        uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
-        with:
-          registry: ${{ env.REGISTRY }}
-          password: ${{ secrets.GITHUB_TOKEN }}
       -
         name: Build and push
         uses: docker/build-push-action@v4
         with:
           context: "{{defaultContext}}:src/main/docker"
+          registry: ${{ env.REGISTRY }}
+          password: ${{ secrets.GITHUB_TOKEN }}
           push: true
           tags: ruffiuss/shop-app:latest
