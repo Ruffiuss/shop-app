@@ -3,6 +3,7 @@ run-name: ${{ github.actor }} <- tester
 on: workflow_dispatch
 env:
   REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
 jobs:
   Build-Docker-Image:
     runs-on: ubuntu-latest
