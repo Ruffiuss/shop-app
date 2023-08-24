@@ -18,4 +18,4 @@ jobs:
         with:
           context: "{{defaultContext}}:src/main/docker"
           push: true
-          tag: latest
+          tags: latest
