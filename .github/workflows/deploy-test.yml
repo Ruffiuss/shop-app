@@ -18,15 +18,15 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      # - name: Extract metadata (tags, labels) for Docker
-      #   id: meta
-      #   uses: docker/metadata-action@v1
-      #   with:
-      #     images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v2
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
           context: "{{defaultContext}}:src/main/docker"
           push: true
-          tags: latest #${{ steps.meta.outputs.tags }}
-          # labels: #${{ steps.meta.outputs.labels }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
